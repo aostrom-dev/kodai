@@ -110,16 +110,6 @@
 
 	const { screenToFlowPosition } = useSvelteFlow();
 
-	// ── Edge delete event forwarded from InfraEdge via custom DOM event ───────────
-
-	let flowWrapper: HTMLDivElement;
-
-	$effect(() => {
-		if (!flowWrapper) return;
-		flowWrapper.addEventListener('deleteEdge', onDeleteEdge as EventListener);
-		return () => flowWrapper.removeEventListener('deleteEdge', onDeleteEdge as EventListener);
-	});
-
 	// ── ID counter ────────────────────────────────────────────────────────────────
 
 	let idCounter = $state(100);
@@ -181,13 +171,6 @@
 		edges = [...edges, newEdge];
 	}
 
-	// ── Delete edge ───────────────────────────────────────────────────────────────
-
-	function onDeleteEdge(event: Event) {
-		const { id } = (event as CustomEvent<{ id: string }>).detail;
-		edges = edges.filter((e) => e.id !== id);
-	}
-
 	// ── Node click → open properties ──────────────────────────────────────────────
 
 	function onNodeClick({ node }: { node: InfraNode; event: MouseEvent | TouchEvent }) {
@@ -204,13 +187,7 @@
 <div class="editor-root">
 	<NodePalette />
 
-	<div
-		class="canvas-wrap"
-		bind:this={flowWrapper}
-		role="main"
-		ondragover={onDragOver}
-		ondrop={onDrop}
-	>
+	<div class="canvas-wrap" role="main" ondragover={onDragOver} ondrop={onDrop}>
 		<SvelteFlow
 			bind:nodes
 			bind:edges

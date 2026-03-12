@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { useSvelteFlow } from '@xyflow/svelte';
-	import type { InfraNode, VmData, DatabaseData, DockerData, IngressData, VolumeData } from '$lib/types';
+	import type {
+		InfraNode,
+		VmData,
+		DatabaseData,
+		DockerData,
+		IngressData,
+		VolumeData
+	} from '$lib/types';
 	import { isVmNode, isDatabaseNode, isDockerNode, isIngressNode, isVolumeNode } from '$lib/types';
 
 	let { node, onclose }: { node: InfraNode; onclose: () => void } = $props();
