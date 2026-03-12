@@ -1,2 +1,23 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { SvelteFlowProvider } from '@xyflow/svelte';
+	import FlowEditor from '$lib/components/FlowEditor.svelte';
+</script>
+
+<SvelteFlowProvider>
+	<FlowEditor />
+</SvelteFlowProvider>
+
+<style>
+	:global(html, body) {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		background: #13181b;
+		font-family:
+			'Inter',
+			-apple-system,
+			BlinkMacSystemFont,
+			'Segoe UI',
+			sans-serif;
+	}
+</style>
