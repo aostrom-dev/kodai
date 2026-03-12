@@ -239,55 +239,65 @@
 
 	/* Edge paths */
 	:global(.svelte-flow__edge-path) {
-		stroke: #ccd5ae;
-		stroke-width: 2;
+		stroke: #2a3e52;
+		stroke-width: 1.5;
 	}
 	:global(.svelte-flow__edge.selected .svelte-flow__edge-path),
 	:global(.svelte-flow__edge:hover .svelte-flow__edge-path) {
 		stroke: #ffbf65;
-	}
-
-	/* Show edge delete button on hover/selected */
-	:global(.svelte-flow__edge:hover .delete-btn),
-	:global(.svelte-flow__edge.selected .delete-btn) {
-		opacity: 1 !important;
+		stroke-width: 2;
 	}
 
 	/* Connection line while dragging */
 	:global(.svelte-flow__connection-path) {
 		stroke: #ffbf65;
 		stroke-width: 2;
-		stroke-dasharray: 5 5;
+		stroke-dasharray: 6 4;
 	}
 
 	/* Handles */
 	:global(.svelte-flow__handle) {
-		width: 10px;
-		height: 10px;
+		width: 9px;
+		height: 9px;
 		border-radius: 50%;
 		background: #003a6c;
 		border: 2px solid #ffbf65;
+		transition: transform 0.15s, background 0.15s;
 	}
 	:global(.svelte-flow__handle:hover) {
 		background: #ffbf65;
-		transform: scale(1.3);
+		transform: scale(1.35);
 	}
 
 	/* Controls panel */
 	:global(.svelte-flow__controls) {
-		border-radius: 8px;
+		background: #18232c;
+		border: 1px solid #243040;
+		border-radius: 10px;
 		overflow: hidden;
-		border: 1px solid #2a3540;
-		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 	}
 	:global(.svelte-flow__controls-button) {
-		border-bottom: 1px solid #2a3540 !important;
+		background: #18232c !important;
+		border-bottom: 1px solid #243040 !important;
+		color: #4e6272 !important;
+		fill: #4e6272 !important;
+		transition: background 0.15s, color 0.15s !important;
+	}
+	:global(.svelte-flow__controls-button:hover) {
+		background: #1f2e3a !important;
+		color: #f0eeeb !important;
+		fill: #f0eeeb !important;
+	}
+	:global(.svelte-flow__controls-button:last-child) {
+		border-bottom: none !important;
 	}
 
 	/* Minimap */
 	:global(.svelte-flow__minimap) {
-		border-radius: 8px;
+		background: #18232c !important;
+		border: 1px solid #243040;
+		border-radius: 10px;
 		overflow: hidden;
-		border: 1px solid #2a3540;
 	}
 </style>

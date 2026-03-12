@@ -202,10 +202,10 @@
 
 <style>
 	.palette {
-		width: 220px;
+		width: 224px;
 		height: 100%;
-		background: #1a242c;
-		border-right: 1px solid #2a3540;
+		background: #0f171e;
+		border-right: 1px solid #1f2c38;
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
@@ -215,13 +215,14 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		padding: 14px 14px 12px;
-		border-bottom: 1px solid #2a3540;
+		padding: 15px 14px 13px;
+		border-bottom: 1px solid #1f2c38;
 	}
 	.palette-logo {
-		width: 34px;
-		height: 34px;
+		width: 32px;
+		height: 32px;
 		background: rgba(255, 191, 101, 0.1);
+		border: 1px solid rgba(255, 191, 101, 0.15);
 		border-radius: 8px;
 		display: flex;
 		align-items: center;
@@ -229,52 +230,53 @@
 		flex-shrink: 0;
 	}
 	.palette-brand {
-		font-size: 15px;
+		font-size: 14px;
 		font-weight: 800;
 		color: #f0eeeb;
-		letter-spacing: -0.02em;
+		letter-spacing: -0.03em;
 	}
 	.palette-subtitle {
 		font-size: 10px;
-		color: #7a8a94;
+		color: #4e6272;
 		margin-top: 1px;
+		letter-spacing: 0.01em;
 	}
 	.palette-section-label {
-		font-size: 10px;
+		font-size: 9.5px;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: #4a5a64;
-		padding: 14px 14px 8px;
+		letter-spacing: 0.1em;
+		color: #3a5060;
+		padding: 14px 14px 6px;
 	}
 	.palette-list {
 		flex: 1;
 		overflow-y: auto;
-		padding: 0 10px;
+		padding: 0 8px;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 2px;
 		scrollbar-width: thin;
-		scrollbar-color: #2a3540 transparent;
+		scrollbar-color: #243040 transparent;
 	}
 	.palette-item {
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		padding: 9px 10px;
+		padding: 8px 10px;
 		border-radius: 8px;
 		border: 1px solid transparent;
 		cursor: grab;
-		transition: all 0.15s;
+		transition: background 0.12s, border-color 0.12s;
 		user-select: none;
-		position: relative;
 	}
 	.palette-item:hover {
 		background: rgba(255, 255, 255, 0.04);
-		border-color: var(--accent, #2a3540);
+		border-color: rgba(255, 255, 255, 0.06);
 	}
 	.palette-item:active {
 		cursor: grabbing;
+		background: rgba(255, 255, 255, 0.06);
 	}
 	.item-icon {
 		width: 30px;
@@ -298,28 +300,29 @@
 	}
 	.item-desc {
 		font-size: 10px;
-		color: #7a8a94;
+		color: #4e6272;
 		margin-top: 1px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.drag-hint {
-		font-size: 14px;
-		color: #3a4a54;
+		font-size: 13px;
+		color: #2a3a48;
 		line-height: 1;
 		flex-shrink: 0;
 	}
 	.palette-item:hover .drag-hint {
-		color: #6a7a84;
+		color: #4e6272;
 	}
 	.palette-footer {
 		padding: 10px 14px;
-		border-top: 1px solid #2a3540;
+		border-top: 1px solid #1f2c38;
 	}
 	.tip {
 		font-size: 10px;
-		color: #4a5a64;
+		color: #3a5060;
 		text-align: center;
+		letter-spacing: 0.02em;
 	}
 </style>

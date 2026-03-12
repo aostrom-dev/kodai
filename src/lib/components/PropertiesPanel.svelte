@@ -489,10 +489,10 @@
 
 <style>
 	.panel {
-		width: 300px;
+		width: 290px;
 		height: 100%;
-		background: #1e2a32;
-		border-left: 1px solid #2a3540;
+		background: #0f171e;
+		border-left: 1px solid #1f2c38;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
@@ -502,29 +502,30 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 14px 16px;
-		border-bottom: 1px solid #2a3540;
+		padding: 15px 16px;
+		border-bottom: 1px solid #1f2c38;
 		flex-shrink: 0;
+		background: #13181b;
 	}
 	.panel-type {
-		font-size: 10px;
+		font-size: 9.5px;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		margin-bottom: 2px;
+		letter-spacing: 0.1em;
+		margin-bottom: 3px;
 	}
 	.panel-title {
-		font-size: 15px;
+		font-size: 14px;
 		font-weight: 700;
 		color: #f0eeeb;
 	}
 	.close-btn {
 		width: 28px;
 		height: 28px;
-		border-radius: 6px;
-		background: transparent;
-		border: 1px solid #2a3540;
-		color: #7a8a94;
+		border-radius: 7px;
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid #243040;
+		color: #4e6272;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -534,82 +535,91 @@
 	}
 	.close-btn:hover {
 		background: rgba(253, 137, 115, 0.1);
-		border-color: #fd8973;
+		border-color: rgba(253, 137, 115, 0.4);
 		color: #fd8973;
 	}
 	.panel-body {
 		flex: 1;
 		overflow-y: auto;
-		padding: 12px 0;
+		padding: 8px 0;
 		scrollbar-width: thin;
-		scrollbar-color: #2a3540 transparent;
+		scrollbar-color: #243040 transparent;
 	}
 	.section {
-		padding: 0 16px 16px;
-		border-bottom: 1px solid #1a242c;
-		margin-bottom: 4px;
+		padding: 12px 16px 14px;
+		border-bottom: 1px solid #1a2530;
 	}
 	.section:last-child {
 		border-bottom: none;
 	}
 	.section-title {
-		font-size: 11px;
+		font-size: 9.5px;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.07em;
-		color: #7a8a94;
+		letter-spacing: 0.1em;
+		color: #3a5060;
 		margin-bottom: 10px;
-		padding-top: 12px;
 		display: block;
 	}
 	.section-title-row {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-top: 12px;
 		margin-bottom: 10px;
 	}
 	.section-title-row .section-title {
-		padding-top: 0;
 		margin-bottom: 0;
 	}
 	.field {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-		margin-bottom: 8px;
+		flex-direction: column;
+		gap: 5px;
+		margin-bottom: 10px;
 	}
 	.field:last-child {
 		margin-bottom: 0;
 	}
-	.field span {
-		font-size: 12px;
-		color: #ccd5ae;
-		flex-shrink: 0;
-		min-width: 90px;
+	.field > span {
+		font-size: 10.5px;
+		font-weight: 600;
+		color: #4e6272;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
 	}
-	.field.toggle span {
-		min-width: 0;
-		flex: 1;
+	.field.toggle {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 7px 10px;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid #1f2c38;
+		border-radius: 7px;
+	}
+	.field.toggle > span {
+		font-size: 12px;
+		font-weight: 500;
+		text-transform: none;
+		letter-spacing: 0;
+		color: #ccd5ae;
 	}
 	.field input[type='text'],
 	.field input[type='number'],
 	.field select {
-		flex: 1;
+		width: 100%;
 		background: #13181b;
-		border: 1px solid #2a3540;
+		border: 1px solid #243040;
 		color: #f0eeeb;
-		border-radius: 6px;
-		padding: 5px 8px;
+		border-radius: 7px;
+		padding: 7px 10px;
 		font-size: 12px;
-		min-width: 0;
 		outline: none;
-		transition: border-color 0.15s;
+		transition: border-color 0.15s, background 0.15s;
+		box-sizing: border-box;
 	}
 	.field input:focus,
 	.field select:focus {
 		border-color: #ffbf65;
+		background: #18232c;
 	}
 	.field :global(input[type='checkbox']) {
 		width: 16px;
@@ -618,18 +628,20 @@
 		cursor: pointer;
 	}
 	.add-btn {
-		font-size: 11px;
+		font-size: 10.5px;
 		font-weight: 600;
-		padding: 3px 8px;
-		border-radius: 5px;
-		background: rgba(255, 191, 101, 0.1);
-		border: 1px solid rgba(255, 191, 101, 0.25);
+		padding: 3px 9px;
+		border-radius: 6px;
+		background: rgba(255, 191, 101, 0.08);
+		border: 1px solid rgba(255, 191, 101, 0.2);
 		color: #ffbf65;
 		cursor: pointer;
 		transition: all 0.15s;
+		letter-spacing: 0.02em;
 	}
 	.add-btn:hover {
-		background: rgba(255, 191, 101, 0.2);
+		background: rgba(255, 191, 101, 0.15);
+		border-color: rgba(255, 191, 101, 0.35);
 	}
 	.list-row {
 		display: flex;
@@ -640,14 +652,15 @@
 	.list-row input {
 		flex: 1;
 		background: #13181b;
-		border: 1px solid #2a3540;
+		border: 1px solid #243040;
 		color: #f0eeeb;
 		border-radius: 6px;
-		padding: 4px 7px;
+		padding: 5px 8px;
 		font-size: 12px;
 		font-family: monospace;
 		min-width: 0;
 		outline: none;
+		transition: border-color 0.15s;
 	}
 	.list-row input:focus {
 		border-color: #ffbf65;
@@ -661,17 +674,17 @@
 	}
 	.list-sep {
 		font-size: 12px;
-		color: #7a8a94;
+		color: #3a5060;
 		flex-shrink: 0;
 	}
 	.remove-btn {
-		width: 22px;
-		height: 22px;
+		width: 24px;
+		height: 24px;
 		border-radius: 5px;
 		background: transparent;
-		border: 1px solid #2a3540;
-		color: #7a8a94;
-		font-size: 14px;
+		border: 1px solid #243040;
+		color: #4e6272;
+		font-size: 15px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -682,12 +695,12 @@
 	}
 	.remove-btn:hover {
 		background: rgba(253, 137, 115, 0.1);
-		border-color: #fd8973;
+		border-color: rgba(253, 137, 115, 0.35);
 		color: #fd8973;
 	}
 	.empty-hint {
 		font-size: 11px;
-		color: #4a5a64;
+		color: #3a5060;
 		font-style: italic;
 		padding: 4px 0;
 	}

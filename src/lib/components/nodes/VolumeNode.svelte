@@ -52,28 +52,38 @@
 
 <style>
 	.node-card {
-		min-width: 190px;
-		background: #1e2a32;
-		border: 1px solid #2a3540;
-		border-radius: 10px;
+		min-width: 210px;
+		background: #18232c;
+		border: 1px solid #243040;
+		border-radius: 12px;
 		overflow: hidden;
-		transition: box-shadow 0.15s;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+		transition: box-shadow 0.2s, border-color 0.2s;
 	}
 	.node-card.selected {
 		border-color: var(--accent);
-		box-shadow: 0 0 0 2px var(--accent);
+		box-shadow: 0 0 0 1px var(--accent), 0 6px 20px rgba(0, 0, 0, 0.4);
 	}
 	.node-header {
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		padding: 10px 14px 8px;
-		border-bottom: 1px solid #2a3540;
+		padding: 11px 13px 9px;
+		border-bottom: 1px solid #1f2c38;
+		position: relative;
+	}
+	.node-header::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 2px;
+		background: var(--accent);
+		opacity: 0.7;
 	}
 	.node-icon {
-		width: 34px;
-		height: 34px;
-		border-radius: 8px;
+		width: 32px;
+		height: 32px;
+		border-radius: 7px;
 		background: var(--icon-bg);
 		color: var(--accent);
 		display: flex;
@@ -82,32 +92,33 @@
 		flex-shrink: 0;
 	}
 	.node-type {
-		font-size: 10px;
-		font-weight: 600;
+		font-size: 9.5px;
+		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.07em;
+		letter-spacing: 0.09em;
 		color: var(--accent);
-		opacity: 0.85;
 	}
 	.node-label {
 		font-size: 13px;
 		font-weight: 600;
 		color: #f0eeeb;
-		margin-top: 1px;
+		margin-top: 2px;
 	}
 	.node-body {
-		padding: 8px 14px 10px;
+		padding: 10px 13px 12px;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 5px;
 	}
 	.node-stat {
 		display: flex;
 		justify-content: space-between;
-		font-size: 11px;
+		align-items: center;
+		font-size: 11.5px;
 	}
 	.stat-key {
-		color: #7a8a94;
+		color: #4e6272;
+		font-weight: 500;
 	}
 	.stat-val {
 		color: #ccd5ae;
