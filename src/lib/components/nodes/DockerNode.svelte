@@ -1,12 +1,49 @@
 <script lang="ts">
 	import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+	import { tick } from 'svelte';
 	import type { DockerNode } from '$lib/types';
 
 	let { data, selected }: NodeProps<DockerNode> = $props();
+
+	let cardEl: HTMLElement | null = $state(null);
+	let portRowEls: HTMLElement[] = $state([]);
+	let portHandleTops: string[] = $state([]);
+
+	function recalcHandlePositions() {
+		if (!cardEl) return;
+		// Read all bounding rects in a single batch before computing (avoids layout thrashing)
+		const cardRect = cardEl.getBoundingClientRect();
+		if (cardRect.height === 0) return;
+		const rowRects = data.ports.map((_port, i) => portRowEls[i]?.getBoundingClientRect());
+
+		portHandleTops = rowRects.map((rowRect) => {
+			if (!rowRect) return '50%';
+			const centerY = rowRect.top + rowRect.height / 2 - cardRect.top;
+			return `${((centerY / cardRect.height) * 100).toFixed(2)}%`;
+		});
+	}
+
+	$effect(() => {
+		void data.ports.length;
+		// Use a cancellation flag so a fast port-change doesn't apply a stale layout
+		let cancelled = false;
+		tick().then(() => {
+			if (!cancelled) recalcHandlePositions();
+		});
+		return () => {
+			cancelled = true;
+		};
+	});
 </script>
 
-<div class="node-card" class:selected style="--accent: #0db7ed; --icon-bg: rgba(13,183,237,0.1);">
-	<Handle type="target" position={Position.Top} />
+<div
+	class="node-card"
+	class:selected
+	style="--accent: #0db7ed; --icon-bg: rgba(13,183,237,0.1);"
+	bind:this={cardEl}
+>
+	<!-- Any number of incoming connections accepted on the left -->
+	<Handle type="target" position={Position.Left} />
 
 	<div class="node-header">
 		<div class="node-icon">
@@ -57,7 +94,44 @@
 		</div>
 	</div>
 
-	<Handle type="source" position={Position.Bottom} />
+	<!-- Ports section: one row per exposed port, each with a right-side source handle -->
+	{#if data.ports.length > 0}
+		<div class="node-ports">
+			{#each data.ports as port, i}
+				<div class="port-row" bind:this={portRowEls[i]}>
+					<span class="port-icon">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="10"
+							height="10"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<circle cx="12" cy="12" r="4" />
+							<path
+								d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+							/>
+						</svg>
+					</span>
+					<span class="port-label">:{port.container}</span>
+				</div>
+				<!-- One source handle per exposed port on the right side -->
+				<Handle
+					type="source"
+					position={Position.Right}
+					id="port-{i}"
+					style="top: {portHandleTops[i] ?? '50%'}"
+				/>
+			{/each}
+		</div>
+	{:else}
+		<!-- Fallback handle when no ports are defined -->
+		<Handle type="source" position={Position.Right} />
+	{/if}
 </div>
 
 <style>
@@ -119,7 +193,7 @@
 		margin-top: 2px;
 	}
 	.node-body {
-		padding: 10px 13px 12px;
+		padding: 10px 13px 8px;
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -141,5 +215,34 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+	.node-ports {
+		border-top: 1px solid #1f2c38;
+		padding: 4px 13px 10px;
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+	}
+	.port-row {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 11px;
+		font-family: monospace;
+		background: rgba(13, 183, 237, 0.06);
+		border: 1px solid rgba(13, 183, 237, 0.12);
+		/* extra right padding leaves visual room for the right-side handle */
+		padding: 3px 18px 3px 7px;
+		border-radius: 5px;
+	}
+	.port-icon {
+		color: var(--accent);
+		opacity: 0.7;
+		display: flex;
+		align-items: center;
+	}
+	.port-label {
+		color: #0db7ed;
+		font-weight: 600;
 	}
 </style>

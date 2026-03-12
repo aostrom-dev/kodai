@@ -1,12 +1,51 @@
 <script lang="ts">
 	import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+	import { tick } from 'svelte';
 	import type { IngressNode } from '$lib/types';
 
 	let { data, selected }: NodeProps<IngressNode> = $props();
+
+	let cardEl: HTMLElement | null = $state(null);
+	let routeRowEls: HTMLElement[] = $state([]);
+	let routeHandleTops: string[] = $state([]);
+
+	const displayedRules = $derived(data.rules.slice(0, 3));
+
+	function recalcHandlePositions() {
+		if (!cardEl) return;
+		// Read all bounding rects in a single batch before computing (avoids layout thrashing)
+		const cardRect = cardEl.getBoundingClientRect();
+		if (cardRect.height === 0) return;
+		const rowRects = displayedRules.map((_rule, i) => routeRowEls[i]?.getBoundingClientRect());
+
+		routeHandleTops = rowRects.map((rowRect) => {
+			if (!rowRect) return '50%';
+			const centerY = rowRect.top + rowRect.height / 2 - cardRect.top;
+			return `${((centerY / cardRect.height) * 100).toFixed(2)}%`;
+		});
+	}
+
+	$effect(() => {
+		void data.rules.length;
+		// Use a cancellation flag so a fast rule-change doesn't apply a stale layout
+		let cancelled = false;
+		tick().then(() => {
+			if (!cancelled) recalcHandlePositions();
+		});
+		return () => {
+			cancelled = true;
+		};
+	});
 </script>
 
-<div class="node-card" class:selected style="--accent: #fd8973; --icon-bg: rgba(253,137,115,0.1);">
-	<Handle type="target" position={Position.Top} />
+<div
+	class="node-card"
+	class:selected
+	style="--accent: #fd8973; --icon-bg: rgba(253,137,115,0.1);"
+	bind:this={cardEl}
+>
+	<!-- Single entry handle on the left side -->
+	<Handle type="target" position={Position.Left} />
 
 	<div class="node-header">
 		<div class="node-icon">
@@ -44,27 +83,32 @@
 				{data.tls ? 'HTTPS' : 'HTTP only'}
 			</span>
 		</div>
-		<div class="node-stat">
-			<span class="stat-key">Routes</span>
-			<span class="stat-val">{data.rules.length}</span>
-		</div>
 	</div>
 
 	{#if data.rules.length > 0}
 		<div class="node-routes">
-			{#each data.rules.slice(0, 3) as rule}
-				<div class="route-row">
+			{#each displayedRules as rule, i}
+				<!-- Route row; the right-side handle is positioned to align with it -->
+				<div class="route-row" bind:this={routeRowEls[i]}>
 					<span class="route-path">{rule.path}</span>
 					<span class="route-port">:{rule.targetPort}</span>
 				</div>
+				<!-- One source handle per path, on the right side -->
+				<Handle
+					type="source"
+					position={Position.Right}
+					id="rule-{i}"
+					style="top: {routeHandleTops[i] ?? '50%'}"
+				/>
 			{/each}
 			{#if data.rules.length > 3}
 				<div class="route-more">+{data.rules.length - 3} more routes</div>
 			{/if}
 		</div>
+	{:else}
+		<!-- Fallback handle when no routes are defined -->
+		<Handle type="source" position={Position.Right} />
 	{/if}
-
-	<Handle type="source" position={Position.Bottom} />
 </div>
 
 <style>
@@ -169,7 +213,8 @@
 		font-family: monospace;
 		background: rgba(253, 137, 115, 0.06);
 		border: 1px solid rgba(253, 137, 115, 0.1);
-		padding: 3px 7px;
+		/* extra right padding leaves visual room for the right-side handle */
+		padding: 3px 18px 3px 7px;
 		border-radius: 5px;
 	}
 	.route-path {

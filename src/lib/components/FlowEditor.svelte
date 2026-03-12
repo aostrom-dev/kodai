@@ -51,7 +51,14 @@
 			id: 'ingress-1',
 			type: 'ingress',
 			position: { x: 300, y: 50 },
-			data: { ...defaultIngressData(), label: 'Main Ingress' }
+			data: {
+				...defaultIngressData(),
+				label: 'Main Ingress',
+				rules: [
+					{ path: '/**', targetPort: 3000 },
+					{ path: '/api/**', targetPort: 8080 }
+				]
+			}
 		},
 		{
 			id: 'docker-1',
@@ -93,10 +100,14 @@
 	]);
 
 	let edges = $state.raw<InfraEdgeType[]>([
-		{ id: 'e1', source: 'ingress-1', target: 'docker-1', type: 'infra' },
-		{ id: 'e2', source: 'ingress-1', target: 'docker-2', type: 'infra' },
-		{ id: 'e3', source: 'docker-1', target: 'db-1', type: 'infra' },
-		{ id: 'e4', source: 'docker-2', target: 'vm-1', type: 'infra' }
+		// Ingress rule-1 (/api/**) → API Server (docker-1)
+		{ id: 'e1', source: 'ingress-1', target: 'docker-1', type: 'infra', sourceHandle: 'rule-1' },
+		// Ingress rule-0 (/**) → Frontend (docker-2)
+		{ id: 'e2', source: 'ingress-1', target: 'docker-2', type: 'infra', sourceHandle: 'rule-0' },
+		// API Server port-0 → Primary DB
+		{ id: 'e3', source: 'docker-1', target: 'db-1', type: 'infra', sourceHandle: 'port-0' },
+		// Frontend port-0 → Worker Node VM
+		{ id: 'e4', source: 'docker-2', target: 'vm-1', type: 'infra', sourceHandle: 'port-0' }
 	]);
 
 	// ── Selected node ─────────────────────────────────────────────────────────────
