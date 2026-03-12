@@ -52,10 +52,21 @@ export type IngressData = {
 
 export type IngressNode = Node<IngressData, 'ingress'>;
 
+// ─── Volume ───────────────────────────────────────────────────────────────────
+
+export type VolumeData = {
+	label: string;
+	sizeGb: number;
+	type: 'SSD' | 'HDD' | 'NVMe';
+	mountPath: string;
+};
+
+export type VolumeNode = Node<VolumeData, 'volume'>;
+
 // ─── Union types ──────────────────────────────────────────────────────────────
 
-export type InfraNodeData = VmData | DatabaseData | DockerData | IngressData;
-export type InfraNode = VmNode | DatabaseNode | DockerNode | IngressNode;
+export type InfraNodeData = VmData | DatabaseData | DockerData | IngressData | VolumeData;
+export type InfraNode = VmNode | DatabaseNode | DockerNode | IngressNode | VolumeNode;
 export type InfraEdge = Edge;
 
 // ─── Type guards ──────────────────────────────────────────────────────────────
@@ -74,6 +85,10 @@ export function isDockerNode(node: InfraNode): node is DockerNode {
 
 export function isIngressNode(node: InfraNode): node is IngressNode {
 	return node.type === 'ingress';
+}
+
+export function isVolumeNode(node: InfraNode): node is VolumeNode {
+	return node.type === 'volume';
 }
 
 // ─── Default data factories ───────────────────────────────────────────────────
@@ -119,5 +134,14 @@ export function defaultIngressData(): IngressData {
 		domain: 'example.com',
 		tls: true,
 		rules: [{ path: '/', targetPort: 80 }]
+	};
+}
+
+export function defaultVolumeData(): VolumeData {
+	return {
+		label: 'Volume',
+		sizeGb: 50,
+		type: 'SSD',
+		mountPath: '/data'
 	};
 }

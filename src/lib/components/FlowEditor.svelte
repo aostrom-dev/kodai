@@ -18,13 +18,15 @@
 	import DockerNode from '$lib/components/nodes/DockerNode.svelte';
 	import IngressNode from '$lib/components/nodes/IngressNode.svelte';
 	import InfraEdge from '$lib/components/edges/InfraEdge.svelte';
+	import VolumeNode from '$lib/components/nodes/VolumeNode.svelte';
 
 	import type { InfraNode, InfraEdge as InfraEdgeType } from '$lib/types';
 	import {
 		defaultVmData,
 		defaultDatabaseData,
 		defaultDockerData,
-		defaultIngressData
+		defaultIngressData,
+		defaultVolumeData
 	} from '$lib/types';
 
 	// ── Node / Edge type registries ───────────────────────────────────────────────
@@ -33,7 +35,8 @@
 		vm: VmNode,
 		database: DatabaseNode,
 		docker: DockerNode,
-		ingress: IngressNode
+		ingress: IngressNode,
+		volume: VolumeNode
 	};
 
 	const edgeTypes: EdgeTypes = {
@@ -152,6 +155,9 @@
 			case 'ingress':
 				data = defaultIngressData();
 				break;
+			case 'volume':
+				data = defaultVolumeData();
+				break;
 			default:
 				return;
 		}
@@ -210,7 +216,7 @@
 			bind:edges
 			{nodeTypes}
 			{edgeTypes}
-			defaultEdgeOptions={{ type: 'infra', animated: true }}
+			defaultEdgeOptions={{ type: 'infra' }}
 			fitView
 			onconnect={onConnect}
 			onnodeclick={onNodeClick}
@@ -224,7 +230,8 @@
 						vm: '#ffbf65',
 						database: '#4db33d',
 						docker: '#0db7ed',
-						ingress: '#fd8973'
+						ingress: '#fd8973',
+						volume: '#a78bfa'
 					};
 					return colors[n.type ?? ''] ?? '#2a3540';
 				}}

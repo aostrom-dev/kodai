@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { Handle, Position, type NodeProps } from '@xyflow/svelte';
-	import type { DockerNode } from '$lib/types';
+	import type { VolumeNode } from '$lib/types';
 
-	let { data, selected }: NodeProps<DockerNode> = $props();
+	let { data, selected }: NodeProps<VolumeNode> = $props();
 </script>
 
-<div class="node-card" class:selected style="--accent: #0db7ed; --icon-bg: rgba(13,183,237,0.1);">
+<div class="node-card" class:selected style="--accent: #a78bfa; --icon-bg: rgba(167,139,250,0.12);">
 	<Handle type="target" position={Position.Top} />
 
 	<div class="node-header">
 		<div class="node-icon">
-			<!-- Docker whale icon (simplified) -->
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="18"
@@ -22,38 +21,29 @@
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			>
-				<path
-					d="M22 12.5c0-.83-.67-1.5-1.5-1.5H14v-2h-2v2H8V9H6v2H2.5C1.67 11 1 11.67 1 12.5v.5h21v-.5z"
-				/>
-				<path d="M1 13c0 2.76 4.03 5 9 5s9-2.24 9-5" />
-				<rect x="8" y="5" width="2" height="2" />
-				<rect x="11" y="5" width="2" height="2" />
-				<rect x="14" y="5" width="2" height="2" />
-				<rect x="11" y="2" width="2" height="2" />
+				<ellipse cx="12" cy="5" rx="9" ry="3" />
+				<path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+				<path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
 			</svg>
 		</div>
 		<div>
-			<div class="node-type">Container</div>
+			<div class="node-type">Volume</div>
 			<div class="node-label">{data.label}</div>
 		</div>
 	</div>
 
 	<div class="node-body">
 		<div class="node-stat">
-			<span class="stat-key">Image</span>
-			<span class="stat-val">{data.image}:{data.tag}</span>
+			<span class="stat-key">Size</span>
+			<span class="stat-val">{data.sizeGb} GB</span>
 		</div>
 		<div class="node-stat">
-			<span class="stat-key">Replicas</span>
-			<span class="stat-val">{data.replicas}</span>
+			<span class="stat-key">Type</span>
+			<span class="stat-val">{data.type}</span>
 		</div>
 		<div class="node-stat">
-			<span class="stat-key">CPU Limit</span>
-			<span class="stat-val">{data.cpuLimit}</span>
-		</div>
-		<div class="node-stat">
-			<span class="stat-key">Memory</span>
-			<span class="stat-val">{data.memoryLimit}</span>
+			<span class="stat-key">Mount</span>
+			<span class="stat-val">{data.mountPath}</span>
 		</div>
 	</div>
 
@@ -62,7 +52,7 @@
 
 <style>
 	.node-card {
-		min-width: 210px;
+		min-width: 190px;
 		background: #1e2a32;
 		border: 1px solid #2a3540;
 		border-radius: 10px;
@@ -122,7 +112,7 @@
 	.stat-val {
 		color: #ccd5ae;
 		font-weight: 500;
-		max-width: 130px;
+		max-width: 120px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;

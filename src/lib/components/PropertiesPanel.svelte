@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { useSvelteFlow } from '@xyflow/svelte';
-	import type { InfraNode, VmData, DatabaseData, DockerData, IngressData } from '$lib/types';
-	import { isVmNode, isDatabaseNode, isDockerNode, isIngressNode } from '$lib/types';
+	import type { InfraNode, VmData, DatabaseData, DockerData, IngressData, VolumeData } from '$lib/types';
+	import { isVmNode, isDatabaseNode, isDockerNode, isIngressNode, isVolumeNode } from '$lib/types';
 
 	let { node, onclose }: { node: InfraNode; onclose: () => void } = $props();
 
@@ -12,8 +12,9 @@
 	let dbData = $derived(isDatabaseNode(node) ? (node.data as DatabaseData) : null);
 	let dockerData = $derived(isDockerNode(node) ? (node.data as DockerData) : null);
 	let ingressData = $derived(isIngressNode(node) ? (node.data as IngressData) : null);
+	let volumeData = $derived(isVolumeNode(node) ? (node.data as VolumeData) : null);
 
-	function update(patch: Partial<VmData | DatabaseData | DockerData | IngressData>) {
+	function update(patch: Partial<VmData | DatabaseData | DockerData | IngressData | VolumeData>) {
 		updateNodeData(node.id, patch);
 	}
 
@@ -66,13 +67,15 @@
 		vm: 'Virtual Machine',
 		database: 'Database',
 		docker: 'Container',
-		ingress: 'Ingress'
+		ingress: 'Ingress',
+		volume: 'Volume'
 	};
 	const nodeTypeAccent: Record<string, string> = {
 		vm: '#ffbf65',
 		database: '#fd8973',
 		docker: '#0db7ed',
-		ingress: '#fd8973'
+		ingress: '#fd8973',
+		volume: '#a78bfa'
 	};
 </script>
 
@@ -424,6 +427,54 @@
 				{#if ingressData.rules.length === 0}
 					<div class="empty-hint">No routing rules</div>
 				{/if}
+			</div>
+		{/if}
+		<!-- ── Volume Properties ─────────────────────── -->
+		{#if volumeData}
+			<div class="section">
+				<div class="section-title">General</div>
+				<label class="field">
+					<span>Label</span>
+					<input
+						type="text"
+						value={volumeData.label}
+						oninput={(e) => update({ label: (e.target as HTMLInputElement).value })}
+					/>
+				</label>
+				<label class="field">
+					<span>Mount Path</span>
+					<input
+						type="text"
+						value={volumeData.mountPath}
+						oninput={(e) => update({ mountPath: (e.target as HTMLInputElement).value })}
+						placeholder="/data"
+					/>
+				</label>
+			</div>
+			<div class="section">
+				<div class="section-title">Storage</div>
+				<label class="field">
+					<span>Size (GB)</span>
+					<input
+						type="number"
+						min="1"
+						max="65536"
+						value={volumeData.sizeGb}
+						oninput={(e) => update({ sizeGb: +(e.target as HTMLInputElement).value })}
+					/>
+				</label>
+				<label class="field">
+					<span>Disk Type</span>
+					<select
+						value={volumeData.type}
+						onchange={(e) =>
+							update({ type: (e.target as HTMLSelectElement).value as VolumeData['type'] })}
+					>
+						<option value="SSD">SSD</option>
+						<option value="HDD">HDD</option>
+						<option value="NVMe">NVMe</option>
+					</select>
+				</label>
 			</div>
 		{/if}
 	</div>
