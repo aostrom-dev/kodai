@@ -267,7 +267,9 @@
 		border-radius: 8px;
 		border: 1px solid transparent;
 		cursor: grab;
-		transition: background 0.12s, border-color 0.12s;
+		transition:
+			background 0.12s,
+			border-color 0.12s;
 		user-select: none;
 	}
 	.palette-item:hover {

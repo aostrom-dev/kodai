@@ -492,11 +492,13 @@
 		width: 290px;
 		height: 100%;
 		background: #0f171e;
-		border-left: 1px solid #1f2c38;
+		border: 1px solid #1f2c38;
+		border-radius: 14px;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
 		flex-shrink: 0;
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
 	}
 	.panel-header {
 		display: flex;
@@ -506,6 +508,7 @@
 		border-bottom: 1px solid #1f2c38;
 		flex-shrink: 0;
 		background: #13181b;
+		border-radius: 14px 14px 0 0;
 	}
 	.panel-type {
 		font-size: 9.5px;
@@ -613,7 +616,9 @@
 		padding: 7px 10px;
 		font-size: 12px;
 		outline: none;
-		transition: border-color 0.15s, background 0.15s;
+		transition:
+			border-color 0.15s,
+			background 0.15s;
 		box-sizing: border-box;
 	}
 	.field input:focus,

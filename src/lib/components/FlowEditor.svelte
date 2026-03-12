@@ -13,6 +13,7 @@
 
 	import NodePalette from '$lib/components/NodePalette.svelte';
 	import PropertiesPanel from '$lib/components/PropertiesPanel.svelte';
+	import { fly } from 'svelte/transition';
 	import VmNode from '$lib/components/nodes/VmNode.svelte';
 	import DatabaseNode from '$lib/components/nodes/DatabaseNode.svelte';
 	import DockerNode from '$lib/components/nodes/DockerNode.svelte';
@@ -217,7 +218,9 @@
 	</div>
 
 	{#if selectedNode}
-		<PropertiesPanel node={selectedNode} onclose={() => (selectedNodeId = null)} />
+		<div class="panel-overlay" transition:fly={{ x: 320, duration: 240, opacity: 1 }}>
+			<PropertiesPanel node={selectedNode} onclose={() => (selectedNodeId = null)} />
+		</div>
 	{/if}
 </div>
 
@@ -235,6 +238,15 @@
 		min-width: 0;
 		height: 100%;
 		position: relative;
+	}
+
+	.panel-overlay {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		bottom: 12px;
+		z-index: 10;
+		pointer-events: auto;
 	}
 
 	/* Edge paths */
@@ -262,7 +274,9 @@
 		border-radius: 50%;
 		background: #003a6c;
 		border: 2px solid #ffbf65;
-		transition: transform 0.15s, background 0.15s;
+		transition:
+			transform 0.15s,
+			background 0.15s;
 	}
 	:global(.svelte-flow__handle:hover) {
 		background: #ffbf65;
@@ -282,7 +296,9 @@
 		border-bottom: 1px solid #243040 !important;
 		color: #4e6272 !important;
 		fill: #4e6272 !important;
-		transition: background 0.15s, color 0.15s !important;
+		transition:
+			background 0.15s,
+			color 0.15s !important;
 	}
 	:global(.svelte-flow__controls-button:hover) {
 		background: #1f2e3a !important;

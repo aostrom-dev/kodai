@@ -75,11 +75,15 @@
 		border-radius: 12px;
 		overflow: hidden;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-		transition: box-shadow 0.2s, border-color 0.2s;
+		transition:
+			box-shadow 0.2s,
+			border-color 0.2s;
 	}
 	.node-card.selected {
 		border-color: var(--accent);
-		box-shadow: 0 0 0 1px var(--accent), 0 6px 20px rgba(0, 0, 0, 0.4);
+		box-shadow:
+			0 0 0 1px var(--accent),
+			0 6px 20px rgba(0, 0, 0, 0.4);
 	}
 	.node-header {
 		display: flex;
