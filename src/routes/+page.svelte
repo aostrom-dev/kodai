@@ -1,18 +1,15 @@
 <script lang="ts">
-	import { SvelteFlowProvider } from '@xyflow/svelte';
-	import FlowEditor from '$lib/components/FlowEditor.svelte';
+	import OverviewDashboard from '$lib/components/dashboard/OverviewDashboard.svelte';
 </script>
 
-<SvelteFlowProvider>
-	<FlowEditor />
-</SvelteFlowProvider>
+<OverviewDashboard />
 
 <style>
 	:global(html, body) {
 		margin: 0;
 		padding: 0;
-		height: 100%;
-		background: #13181b;
+		min-height: 100%;
+		background: #0f171e;
 		font-family:
 			'Inter',
 			-apple-system,
