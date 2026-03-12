@@ -197,6 +197,23 @@
 
 	<div class="palette-footer">
 		<div class="tip">Drag nodes onto the canvas</div>
+		<a href="/billing" class="billing-link">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="12"
+				height="12"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<line x1="12" y1="1" x2="12" y2="23" />
+				<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+			</svg>
+			Billing
+		</a>
 	</div>
 </aside>
 
@@ -320,11 +337,33 @@
 	.palette-footer {
 		padding: 10px 14px;
 		border-top: 1px solid #1f2c38;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
 	}
 	.tip {
 		font-size: 10px;
 		color: #3a5060;
 		text-align: center;
 		letter-spacing: 0.02em;
+	}
+	.billing-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		padding: 6px 10px;
+		border-radius: 7px;
+		font-size: 11.5px;
+		font-weight: 500;
+		color: #5a7a8a;
+		text-decoration: none;
+		border: 1px solid #1f2c38;
+		transition: all 0.15s;
+	}
+	.billing-link:hover {
+		color: #ffbf65;
+		border-color: rgba(255, 191, 101, 0.2);
+		background: rgba(255, 191, 101, 0.05);
 	}
 </style>
