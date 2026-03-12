@@ -74,25 +74,24 @@
 
 <style>
 	.stat-card {
-		background: #13181b;
-		border: 1px solid #1f2c38;
-		border-radius: 12px;
-		padding: 16px 18px;
+		background: var(--k-black);
+		border-left: 3px solid var(--accent);
+		padding: 20px 20px 18px;
 		display: flex;
 		align-items: flex-start;
 		gap: 14px;
-		transition: border-color 0.15s;
+		transition: background 0.15s;
 	}
 
 	.stat-card:hover {
-		border-color: rgba(255, 191, 101, 0.2);
+		background: var(--k-yellow-tint);
 	}
 
 	.stat-icon {
 		width: 36px;
 		height: 36px;
-		border-radius: 9px;
-		background: color-mix(in srgb, var(--accent) 12%, transparent);
+		border-radius: 8px;
+		background: color-mix(in srgb, var(--accent) 14%, transparent);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -101,8 +100,8 @@
 	}
 
 	.stat-icon svg {
-		width: 16px;
-		height: 16px;
+		width: 17px;
+		height: 17px;
 	}
 
 	.stat-body {
@@ -113,24 +112,26 @@
 	}
 
 	.stat-label {
-		font-size: 11px;
-		font-weight: 500;
-		color: #5a7a8a;
+		font-size: 10px;
+		font-weight: 700;
+		color: var(--k-gray);
 		text-transform: uppercase;
-		letter-spacing: 0.5px;
+		letter-spacing: 0.08em;
 	}
 
 	.stat-value {
-		font-size: 22px;
-		font-weight: 700;
-		color: #f0eeeb;
-		letter-spacing: -0.5px;
+		font-size: 26px;
+		font-weight: 800;
+		color: var(--k-white);
+		letter-spacing: -0.8px;
 		line-height: 1.1;
+		font-variant-numeric: tabular-nums;
 	}
 
 	.stat-sub {
 		font-size: 11px;
-		color: #5a7a8a;
+		color: var(--k-gray);
+		opacity: 0.65;
 		margin-top: 2px;
 	}
 </style>

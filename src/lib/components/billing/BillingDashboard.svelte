@@ -40,375 +40,236 @@
 
 	const typeColors: Record<string, string> = {
 		vm: '#ffbf65',
-		database: '#4db33d',
-		docker: '#0db7ed',
-		ingress: '#fd8973',
-		volume: '#a78bfa'
+		database: '#fd8973',
+		docker: '#ccd5ae',
+		ingress: '#f0eeeb',
+		volume: 'rgba(0,58,108,0.9)'
 	};
 </script>
 
 <div class="dashboard">
-	<!-- ── Header ────────────────────────────────────────────────────────────── -->
-	<header class="dash-header">
-		<div class="header-left">
-			<div class="header-logo">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="18"
-					height="18"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="#ffbf65"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<rect x="2" y="2" width="8" height="8" rx="1.5" />
-					<rect x="14" y="2" width="8" height="8" rx="1.5" />
-					<rect x="2" y="14" width="8" height="8" rx="1.5" />
-					<rect x="14" y="14" width="8" height="8" rx="1.5" />
-				</svg>
-			</div>
-			<div>
-				<div class="header-brand">kodai</div>
-				<div class="header-subtitle">Billing Dashboard</div>
-			</div>
-		</div>
+<!-- ── Header ────────────────────────────────────────────────────────────── -->
+<header class="k-header">
+<div class="k-logo">
+<div class="k-logo-box">
+<svg
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#ffbf65"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<rect x="2" y="2" width="8" height="8" rx="1.5" />
+<rect x="14" y="2" width="8" height="8" rx="1.5" />
+<rect x="2" y="14" width="8" height="8" rx="1.5" />
+<rect x="14" y="14" width="8" height="8" rx="1.5" />
+</svg>
+</div>
+<div>
+<div class="k-brand">kodai</div>
+<div class="k-brand-sub">Billing</div>
+</div>
+</div>
 
-		<div class="header-center">
-			<nav class="nav-tabs">
-				<a href="/" class="nav-tab">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<rect x="3" y="3" width="7" height="7" />
-						<rect x="14" y="3" width="7" height="7" />
-						<rect x="3" y="14" width="7" height="7" />
-						<rect x="14" y="14" width="7" height="7" />
-					</svg>
-					Dashboard
-				</a>
-				<a href="/editor" class="nav-tab">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<polygon
-							points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-						/>
-					</svg>
-					Editor
-				</a>
-				<a href="/billing" class="nav-tab active">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<line x1="12" y1="1" x2="12" y2="23" />
-						<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-					</svg>
-					Billing
-				</a>
-			</nav>
-		</div>
+<nav class="k-nav">
+<a href="/" class="k-nav-item">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
+<rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
+</svg>
+Dashboard
+</a>
+<a href="/editor" class="k-nav-item">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+</svg>
+Editor
+</a>
+<a href="/billing" class="k-nav-item active">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+</svg>
+Billing
+</a>
+</nav>
 
-		<div class="header-right">
-			<div class="org-selector">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="13"
-					height="13"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="#ccd5ae"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-					<circle cx="9" cy="7" r="4" />
-					<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-					<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-				</svg>
-				<select bind:value={selectedOrgId} aria-label="Select organization">
-					{#each organizations as org}
-						<option value={org.id}>{org.name}</option>
-					{/each}
-				</select>
-			</div>
-		</div>
-	</header>
+<div class="header-right">
+<div class="org-selector">
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+<circle cx="9" cy="7" r="4" />
+<path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+</svg>
+<select bind:value={selectedOrgId} aria-label="Select organization">
+{#each organizations as org}
+<option value={org.id}>{org.name}</option>
+{/each}
+</select>
+</div>
+</div>
+</header>
 
-	<!-- ── Summary bar ───────────────────────────────────────────────────────── -->
-	<div class="summary-bar">
-		<div class="summary-item total">
-			<span class="summary-label">Monthly Total</span>
-			<span class="summary-value">{formatCost(orgTotal)}</span>
-		</div>
-		<div class="summary-sep"></div>
-		<div class="summary-item">
-			<span class="summary-label">Projects</span>
-			<span class="summary-value secondary">{selectedOrg?.projects.length ?? 0}</span>
-		</div>
-		<div class="summary-sep"></div>
-		<div class="type-breakdown">
-			{#each Object.entries(typeTotals) as [type, cost]}
-				<div class="type-chip" style="--chip-color: {typeColors[type] ?? '#ccd5ae'}">
-					<span class="type-dot"></span>
-					<span class="type-name">{typeLabels[type] ?? type}</span>
-					<span class="type-cost">{formatCost(cost)}</span>
-				</div>
-			{/each}
-		</div>
-	</div>
+<!-- ── Summary bar ───────────────────────────────────────────────────────── -->
+<div class="summary-bar">
+<div class="summary-block">
+<span class="summary-label">Monthly Total</span>
+<span class="summary-value">{formatCost(orgTotal)}</span>
+</div>
+<div class="summary-divider"></div>
+<div class="summary-block">
+<span class="summary-label">Projects</span>
+<span class="summary-value projects-val">{selectedOrg?.projects.length ?? 0}</span>
+</div>
+<div class="summary-divider"></div>
+<div class="type-breakdown">
+{#each Object.entries(typeTotals) as [type, cost]}
+<div class="type-chip" style="--chip-color: {typeColors[type] ?? '#ccd5ae'}">
+<span class="type-dot"></span>
+<span class="type-name">{typeLabels[type] ?? type}</span>
+<span class="type-cost">{formatCost(cost)}</span>
+</div>
+{/each}
+</div>
+</div>
 
-	<!-- ── Project list ───────────────────────────────────────────────────────── -->
-	<main class="project-list">
-		{#if selectedOrg}
-			{#each selectedOrg.projects as project (project.id)}
-				<ProjectCard {project} total={projectTotal(project)} {orgTotal} />
-			{/each}
-		{/if}
-	</main>
+<!-- ── Project list ───────────────────────────────────────────────────────── -->
+<main class="project-list">
+{#if selectedOrg}
+{#each selectedOrg.projects as project (project.id)}
+<ProjectCard {project} total={projectTotal(project)} {orgTotal} />
+{/each}
+{/if}
+</main>
 </div>
 
 <style>
-	.dashboard {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-		background: #0f171e;
-		color: #f0eeeb;
-		font-family:
-			'Inter',
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			sans-serif;
-	}
+.dashboard {
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+background: var(--k-black);
+color: var(--k-white);
+}
 
-	/* ── Header ──────────────────────────────────────────────────────────────── */
+.header-right {
+flex-shrink: 0;
+}
 
-	.dash-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0 24px;
-		height: 56px;
-		background: #0f171e;
-		border-bottom: 1px solid #1f2c38;
-		gap: 16px;
-		flex-shrink: 0;
-	}
+/* ── Org selector ────────────────────────────────────────────────────────── */
 
-	.header-left {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		flex-shrink: 0;
-	}
+.org-selector {
+display: flex;
+align-items: center;
+gap: 7px;
+background: var(--k-blue);
+border: 1px solid rgba(255, 191, 101, 0.2);
+border-radius: 7px;
+padding: 6px 10px;
+color: var(--k-gray);
+}
 
-	.header-logo {
-		width: 32px;
-		height: 32px;
-		border-radius: 8px;
-		background: rgba(255, 191, 101, 0.1);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-	}
+.org-selector select {
+background: transparent;
+border: none;
+color: var(--k-white);
+font-size: 12.5px;
+font-family: inherit;
+outline: none;
+cursor: pointer;
+}
 
-	.header-brand {
-		font-size: 15px;
-		font-weight: 700;
-		letter-spacing: 0.5px;
-		color: #f0eeeb;
-	}
+/* ── Summary bar ─────────────────────────────────────────────────────────── */
 
-	.header-subtitle {
-		font-size: 10px;
-		color: #5a7a8a;
-		letter-spacing: 0.3px;
-		text-transform: uppercase;
-	}
+.summary-bar {
+display: flex;
+align-items: center;
+gap: 20px;
+padding: 16px 28px;
+background: var(--k-blue);
+border-bottom: 1px solid rgba(255, 191, 101, 0.12);
+flex-wrap: wrap;
+}
 
-	.header-center {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-	}
+.summary-block {
+display: flex;
+flex-direction: column;
+gap: 2px;
+flex-shrink: 0;
+}
 
-	.header-right {
-		flex-shrink: 0;
-	}
+.summary-label {
+font-size: 10px;
+font-weight: 700;
+color: var(--k-gray);
+text-transform: uppercase;
+letter-spacing: 0.08em;
+}
 
-	/* ── Nav tabs ────────────────────────────────────────────────────────────── */
+.summary-value {
+font-size: 22px;
+font-weight: 800;
+color: var(--k-yellow);
+letter-spacing: -0.5px;
+font-variant-numeric: tabular-nums;
+}
 
-	.nav-tabs {
-		display: flex;
-		align-items: center;
-		gap: 4px;
-		background: #13181b;
-		border: 1px solid #1f2c38;
-		border-radius: 8px;
-		padding: 3px;
-	}
+.projects-val {
+color: var(--k-white);
+}
 
-	.nav-tab {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		padding: 5px 12px;
-		border-radius: 6px;
-		font-size: 12.5px;
-		font-weight: 500;
-		color: #5a7a8a;
-		text-decoration: none;
-		transition: all 0.15s;
-	}
+.summary-divider {
+width: 1px;
+height: 36px;
+background: rgba(255, 191, 101, 0.15);
+flex-shrink: 0;
+}
 
-	.nav-tab:hover {
-		color: #ccd5ae;
-		background: #1a2530;
-	}
+.type-breakdown {
+display: flex;
+align-items: center;
+gap: 6px;
+flex-wrap: wrap;
+}
 
-	.nav-tab.active {
-		color: #ffbf65;
-		background: rgba(255, 191, 101, 0.1);
-	}
+.type-chip {
+display: flex;
+align-items: center;
+gap: 5px;
+padding: 4px 10px;
+border-radius: 20px;
+background: rgba(0, 0, 0, 0.2);
+border: 1px solid rgba(255, 255, 255, 0.07);
+font-size: 11.5px;
+}
 
-	/* ── Org selector ────────────────────────────────────────────────────────── */
+.type-dot {
+width: 7px;
+height: 7px;
+border-radius: 50%;
+background: var(--chip-color);
+flex-shrink: 0;
+}
 
-	.org-selector {
-		display: flex;
-		align-items: center;
-		gap: 7px;
-		background: #13181b;
-		border: 1px solid #1f2c38;
-		border-radius: 8px;
-		padding: 5px 10px;
-	}
+.type-name {
+color: var(--k-gray);
+}
 
-	.org-selector select {
-		background: transparent;
-		border: none;
-		color: #f0eeeb;
-		font-size: 13px;
-		font-family: inherit;
-		outline: none;
-		cursor: pointer;
-	}
+.type-cost {
+color: var(--k-white);
+font-weight: 700;
+font-variant-numeric: tabular-nums;
+}
 
-	/* ── Summary bar ─────────────────────────────────────────────────────────── */
+/* ── Project list ────────────────────────────────────────────────────────── */
 
-	.summary-bar {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-		padding: 14px 24px;
-		background: #13181b;
-		border-bottom: 1px solid #1f2c38;
-		flex-wrap: wrap;
-	}
-
-	.summary-item {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-		flex-shrink: 0;
-	}
-
-	.summary-label {
-		font-size: 10px;
-		color: #5a7a8a;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.summary-value {
-		font-size: 20px;
-		font-weight: 700;
-		color: #ffbf65;
-		letter-spacing: -0.3px;
-	}
-
-	.summary-value.secondary {
-		color: #f0eeeb;
-	}
-
-	.summary-sep {
-		width: 1px;
-		height: 32px;
-		background: #1f2c38;
-		flex-shrink: 0;
-	}
-
-	.type-breakdown {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		flex-wrap: wrap;
-	}
-
-	.type-chip {
-		display: flex;
-		align-items: center;
-		gap: 5px;
-		padding: 4px 10px;
-		border-radius: 20px;
-		background: rgba(255, 255, 255, 0.04);
-		border: 1px solid rgba(255, 255, 255, 0.06);
-		font-size: 11.5px;
-	}
-
-	.type-dot {
-		width: 7px;
-		height: 7px;
-		border-radius: 50%;
-		background: var(--chip-color);
-		flex-shrink: 0;
-	}
-
-	.type-name {
-		color: #ccd5ae;
-	}
-
-	.type-cost {
-		color: #f0eeeb;
-		font-weight: 600;
-	}
-
-	/* ── Project list ────────────────────────────────────────────────────────── */
-
-	.project-list {
-		flex: 1;
-		padding: 24px;
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		overflow-y: auto;
-	}
+.project-list {
+flex: 1;
+padding: 20px 28px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+overflow-y: auto;
+}
 </style>

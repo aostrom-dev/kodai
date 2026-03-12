@@ -58,7 +58,7 @@
 		style="display:block;flex-shrink:0;"
 	>
 		<!-- Background ring -->
-		<circle {cx} {cy} {r} fill="none" stroke="#1f2c38" stroke-width={strokeWidth} />
+		<circle {cx} {cy} {r} fill="none" stroke="rgba(0,58,108,0.4)" stroke-width={strokeWidth} />
 
 		<!-- Segments -->
 		{#each segments as seg}
@@ -97,7 +97,7 @@
 				y={cy + 14}
 				text-anchor="middle"
 				dominant-baseline="middle"
-				fill="#5a7a8a"
+				fill="#ccd5ae"
 				font-size="9"
 				font-family="Inter, sans-serif"
 			>

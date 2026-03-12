@@ -74,7 +74,7 @@
 			width={viewWidth - labelWidth - valueWidth - pad.right}
 			height={barHeight}
 			rx="4"
-			fill="#1f2c38"
+			fill="rgba(0,58,108,0.35)"
 		/>
 
 		<!-- Bar fill -->

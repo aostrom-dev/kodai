@@ -81,7 +81,7 @@
 			y1={gl.y.toFixed(1)}
 			x2={viewWidth - pad.right}
 			y2={gl.y.toFixed(1)}
-			stroke="#1f2c38"
+			stroke="rgba(0,58,108,0.45)"
 			stroke-width="1"
 		/>
 		<text
@@ -89,7 +89,7 @@
 			y={gl.y.toFixed(1)}
 			text-anchor="end"
 			dominant-baseline="middle"
-			fill="#5a7a8a"
+			fill="#ccd5ae"
 			font-size="10"
 			font-family="Inter, sans-serif"
 		>
@@ -125,7 +125,7 @@
 			x={xOf(i).toFixed(1)}
 			y={viewHeight - pad.bottom + 16}
 			text-anchor="middle"
-			fill="#5a7a8a"
+			fill="#ccd5ae"
 			font-size="10"
 			font-family="Inter, sans-serif"
 		>

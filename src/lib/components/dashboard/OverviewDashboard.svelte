@@ -37,7 +37,8 @@
 
 	// ── Cost by project (bar chart) ──────────────────────────────────────────
 
-	const projectColors = ['#ffbf65', '#0db7ed', '#4db33d', '#fd8973', '#a78bfa', '#38bdf8'];
+	// Brand-palette-only colors: yellow, orange, gray, white, blue
+	const projectColors = ['#ffbf65', '#fd8973', '#ccd5ae', '#f0eeeb', 'rgba(0,58,108,0.85)'];
 
 	const projectBarData = allProjects
 		.map((p, i) => ({
@@ -62,12 +63,13 @@
 		volume: 'Volumes'
 	};
 
+	// Brand-palette-only type colors
 	const typeColors: Record<string, string> = {
 		vm: '#ffbf65',
-		database: '#4db33d',
-		docker: '#0db7ed',
-		ingress: '#fd8973',
-		volume: '#a78bfa'
+		database: '#fd8973',
+		docker: '#ccd5ae',
+		ingress: '#f0eeeb',
+		volume: 'rgba(0,58,108,0.9)'
 	};
 
 	const donutData = Object.entries(typeAccum)
@@ -95,9 +97,9 @@
 
 <div class="overview">
 	<!-- ── Header ──────────────────────────────────────────────────────────── -->
-	<header class="header">
-		<div class="header-left">
-			<div class="logo-box">
+	<header class="k-header">
+		<div class="k-logo">
+			<div class="k-logo-box">
 				<svg
 					viewBox="0 0 24 24"
 					fill="none"
@@ -113,13 +115,13 @@
 				</svg>
 			</div>
 			<div>
-				<div class="brand">kodai</div>
-				<div class="brand-sub">Platform Dashboard</div>
+				<div class="k-brand">kodai</div>
+				<div class="k-brand-sub">Platform Overview</div>
 			</div>
 		</div>
 
-		<nav class="nav">
-			<a href="/" class="nav-item active">
+		<nav class="k-nav">
+			<a href="/" class="k-nav-item active">
 				<svg
 					viewBox="0 0 24 24"
 					fill="none"
@@ -135,7 +137,7 @@
 				</svg>
 				Dashboard
 			</a>
-			<a href="/editor" class="nav-item">
+			<a href="/editor" class="k-nav-item">
 				<svg
 					viewBox="0 0 24 24"
 					fill="none"
@@ -150,7 +152,7 @@
 				</svg>
 				Editor
 			</a>
-			<a href="/billing" class="nav-item">
+			<a href="/billing" class="k-nav-item">
 				<svg
 					viewBox="0 0 24 24"
 					fill="none"
@@ -167,27 +169,26 @@
 		</nav>
 	</header>
 
-	<!-- ── Page title ──────────────────────────────────────────────────────── -->
-	<div class="page-title">
-		<div>
-			<h1>Overview</h1>
-			<p>Real-time infrastructure cost and resource summary</p>
+	<!-- ── Hero bar ─────────────────────────────────────────────────────────── -->
+	<div class="hero-bar">
+		<div class="hero-content">
+			<div class="hero-label">Total Monthly Infrastructure Cost</div>
+			<div class="hero-value">{formatCost(totalCost)}</div>
+			<div class="hero-sub">{organizations.length} organizations · {allProjects.length} projects</div>
 		</div>
-		<div class="orgs-pill">
+		<div class="trend-badge">
 			<svg
 				viewBox="0 0 24 24"
 				fill="none"
 				stroke="currentColor"
-				stroke-width="2"
+				stroke-width="2.5"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			>
-				<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-				<circle cx="9" cy="7" r="4" />
-				<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-				<path d="M16 3.13a4 4 0 0 1 0 7.75" />
+				<polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+				<polyline points="17 6 23 6 23 12" />
 			</svg>
-			{organizations.length} Organizations
+			+21% in 6 months
 		</div>
 	</div>
 
@@ -205,21 +206,21 @@
 			value={String(allProjects.length)}
 			sub={`${organizations.length} organizations`}
 			icon="projects"
-			accent="#0db7ed"
+			accent="#fd8973"
 		/>
 		<StatCard
 			label="Environments"
 			value={String(allEnvironments.length)}
 			sub={`${allProjects.length} projects`}
 			icon="environments"
-			accent="#4db33d"
+			accent="#ccd5ae"
 		/>
 		<StatCard
 			label="Resources"
 			value={String(totalResourceCount)}
 			sub={`${allResources.length} resource types`}
 			icon="resources"
-			accent="#a78bfa"
+			accent="#f0eeeb"
 		/>
 	</div>
 
@@ -326,146 +327,68 @@
 <style>
 	.overview {
 		min-height: 100vh;
-		background: #0f171e;
-		color: #f0eeeb;
-		font-family:
-			'Inter',
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			sans-serif;
-		padding-bottom: 40px;
+		background: var(--k-black);
+		color: var(--k-white);
+		padding-bottom: 48px;
 	}
 
-	/* ── Header ──────────────────────────────────────────────────────────── */
+	/* ── Hero bar ────────────────────────────────────────────────────────── */
 
-	.header {
+	.hero-bar {
+		background: var(--k-blue);
+		padding: 28px 28px 26px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 28px;
-		height: 56px;
-		background: #0f171e;
-		border-bottom: 1px solid #1f2c38;
-		position: sticky;
-		top: 0;
-		z-index: 10;
+		gap: 20px;
+		border-bottom: 1px solid rgba(255, 191, 101, 0.15);
 	}
 
-	.header-left {
+	.hero-content {
 		display: flex;
-		align-items: center;
-		gap: 10px;
-	}
-
-	.logo-box {
-		width: 32px;
-		height: 32px;
-		border-radius: 8px;
-		background: rgba(255, 191, 101, 0.1);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-	}
-
-	.logo-box svg {
-		width: 16px;
-		height: 16px;
-	}
-
-	.brand {
-		font-size: 15px;
-		font-weight: 800;
-		color: #f0eeeb;
-		letter-spacing: -0.02em;
-	}
-
-	.brand-sub {
-		font-size: 10px;
-		color: #5a7a8a;
-		text-transform: uppercase;
-		letter-spacing: 0.4px;
-	}
-
-	/* ── Nav ─────────────────────────────────────────────────────────────── */
-
-	.nav {
-		display: flex;
-		align-items: center;
+		flex-direction: column;
 		gap: 4px;
-		background: #13181b;
-		border: 1px solid #1f2c38;
-		border-radius: 8px;
-		padding: 3px;
 	}
 
-	.nav-item {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		padding: 5px 13px;
-		border-radius: 6px;
-		font-size: 12.5px;
-		font-weight: 500;
-		color: #5a7a8a;
-		text-decoration: none;
-		transition: all 0.15s;
+	.hero-label {
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--k-gray);
 	}
 
-	.nav-item svg {
-		width: 13px;
-		height: 13px;
+	.hero-value {
+		font-size: 40px;
+		font-weight: 800;
+		color: var(--k-yellow);
+		letter-spacing: -1.5px;
+		line-height: 1;
 	}
 
-	.nav-item:hover {
-		color: #ccd5ae;
-		background: rgba(255, 255, 255, 0.04);
-	}
-
-	.nav-item.active {
-		color: #ffbf65;
-		background: rgba(255, 191, 101, 0.1);
-	}
-
-	/* ── Page title ──────────────────────────────────────────────────────── */
-
-	.page-title {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 24px 28px 0;
-	}
-
-	h1 {
-		margin: 0;
-		font-size: 22px;
-		font-weight: 700;
-		color: #f0eeeb;
-		letter-spacing: -0.3px;
-	}
-
-	.page-title p {
-		margin: 4px 0 0;
+	.hero-sub {
 		font-size: 13px;
-		color: #5a7a8a;
+		color: var(--k-gray);
+		margin-top: 2px;
 	}
 
-	.orgs-pill {
+	.trend-badge {
 		display: flex;
 		align-items: center;
 		gap: 6px;
 		font-size: 12px;
-		color: #ccd5ae;
-		background: #13181b;
-		border: 1px solid #1f2c38;
+		font-weight: 700;
+		color: var(--k-yellow);
+		background: rgba(255, 191, 101, 0.12);
+		border: 1px solid rgba(255, 191, 101, 0.3);
 		border-radius: 20px;
-		padding: 5px 12px;
+		padding: 7px 14px;
+		flex-shrink: 0;
 	}
 
-	.orgs-pill svg {
-		width: 13px;
-		height: 13px;
+	.trend-badge svg {
+		width: 12px;
+		height: 12px;
 	}
 
 	/* ── KPI stats ───────────────────────────────────────────────────────── */
@@ -473,8 +396,9 @@
 	.stats-grid {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		gap: 14px;
-		padding: 20px 28px 0;
+		gap: 1px;
+		background: var(--k-border-subtle);
+		border-bottom: 1px solid var(--k-border-subtle);
 	}
 
 	@media (max-width: 900px) {
@@ -486,21 +410,22 @@
 	/* ── Chart cards ─────────────────────────────────────────────────────── */
 
 	.chart-card {
-		background: #13181b;
-		border: 1px solid #1f2c38;
-		border-radius: 12px;
+		background: var(--k-surface);
+		border: 1px solid var(--k-border);
+		border-radius: 8px;
 		padding: 20px 22px;
+		transition: border-color 0.2s;
 	}
 
-	.full-width {
-		grid-column: 1 / -1;
+	.chart-card:hover {
+		border-color: rgba(255, 191, 101, 0.25);
 	}
 
 	.charts-row {
 		display: grid;
 		grid-template-columns: 1.4fr 1fr;
-		gap: 14px;
-		padding: 14px 28px 0;
+		gap: 16px;
+		padding: 16px 28px 0;
 	}
 
 	@media (max-width: 760px) {
@@ -510,7 +435,7 @@
 	}
 
 	.chart-card.full-width {
-		margin: 14px 28px 0;
+		margin: 16px 28px 0;
 	}
 
 	.chart-header {
@@ -522,34 +447,17 @@
 	}
 
 	.chart-title {
-		font-size: 14px;
-		font-weight: 600;
-		color: #f0eeeb;
+		font-size: 13px;
+		font-weight: 700;
+		color: var(--k-white);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 
 	.chart-sub {
-		font-size: 11.5px;
-		color: #5a7a8a;
-		margin-top: 2px;
-	}
-
-	.trend-badge {
-		display: flex;
-		align-items: center;
-		gap: 5px;
-		font-size: 11.5px;
-		font-weight: 600;
-		color: #4db33d;
-		background: rgba(77, 179, 61, 0.1);
-		border: 1px solid rgba(77, 179, 61, 0.2);
-		border-radius: 20px;
-		padding: 4px 10px;
-		flex-shrink: 0;
-	}
-
-	.trend-badge svg {
-		width: 11px;
-		height: 11px;
+		font-size: 12px;
+		color: var(--k-gray);
+		margin-top: 3px;
 	}
 
 	.donut-container {
@@ -563,18 +471,21 @@
 	.projects-table {
 		width: 100%;
 		border-collapse: collapse;
-		font-size: 12.5px;
+		font-size: 13px;
+	}
+
+	.projects-table thead {
+		background: var(--k-blue);
 	}
 
 	.projects-table thead th {
-		padding: 7px 10px;
+		padding: 10px 12px;
 		text-align: left;
 		font-size: 10px;
-		font-weight: 600;
-		color: #5a7a8a;
+		font-weight: 700;
+		color: var(--k-gray);
 		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		border-bottom: 1px solid #1f2c38;
+		letter-spacing: 0.08em;
 	}
 
 	.projects-table thead th.right {
@@ -582,8 +493,8 @@
 	}
 
 	.projects-table tbody tr {
-		border-bottom: 1px solid rgba(31, 44, 56, 0.6);
-		transition: background 0.1s;
+		border-bottom: 1px solid var(--k-border-subtle);
+		transition: background 0.12s;
 	}
 
 	.projects-table tbody tr:last-child {
@@ -591,44 +502,45 @@
 	}
 
 	.projects-table tbody tr:hover {
-		background: rgba(255, 255, 255, 0.02);
+		background: var(--k-yellow-tint);
 	}
 
 	.projects-table td {
-		padding: 10px 10px;
+		padding: 11px 12px;
 		vertical-align: middle;
-		color: #ccd5ae;
+		color: var(--k-gray);
 	}
 
 	.project-name {
-		font-weight: 600;
-		color: #f0eeeb !important;
+		font-weight: 700;
+		color: var(--k-white) !important;
 	}
 
 	.org-name {
-		font-size: 11.5px;
-		color: #5a7a8a !important;
+		font-size: 12px;
+		color: var(--k-gray) !important;
+		opacity: 0.65;
 	}
 
 	.env-count {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-width: 22px;
-		height: 22px;
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid #1f2c38;
+		min-width: 24px;
+		height: 24px;
+		background: var(--k-surface-raised);
+		border: 1px solid var(--k-border);
 		border-radius: 6px;
 		font-size: 11px;
-		font-weight: 600;
-		color: #ccd5ae;
+		font-weight: 700;
+		color: var(--k-white);
 		padding: 0 6px;
 	}
 
 	.cost-cell {
 		text-align: right;
 		font-weight: 700;
-		color: #f0eeeb !important;
+		color: var(--k-yellow) !important;
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -642,33 +554,34 @@
 		justify-content: flex-end;
 		gap: 8px;
 		font-size: 11px;
-		color: #5a7a8a;
+		color: var(--k-gray);
 		font-variant-numeric: tabular-nums;
 	}
 
 	.share-bar {
-		width: 60px;
+		width: 64px;
 		height: 4px;
-		background: #1f2c38;
+		background: var(--k-border);
 		border-radius: 2px;
 		overflow: hidden;
 	}
 
 	.share-fill {
 		height: 100%;
-		background: linear-gradient(90deg, #ffbf65, #fd8973);
+		background: linear-gradient(90deg, var(--k-yellow), var(--k-orange));
 		border-radius: 2px;
 	}
 
 	.view-all-link {
 		font-size: 12px;
-		color: #ffbf65;
+		font-weight: 600;
+		color: var(--k-yellow);
 		text-decoration: none;
 		flex-shrink: 0;
 		transition: opacity 0.15s;
 	}
 
 	.view-all-link:hover {
-		opacity: 0.8;
+		opacity: 0.7;
 	}
 </style>
