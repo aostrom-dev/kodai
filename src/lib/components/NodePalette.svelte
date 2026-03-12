@@ -13,21 +13,21 @@
 			label: 'Virtual Machine',
 			description: 'Linux or Windows compute',
 			accent: '#ffbf65',
-			iconBg: 'rgba(255,191,101,0.12)'
+			iconBg: 'rgba(255,191,101,0.14)'
 		},
 		{
 			type: 'database',
 			label: 'Database',
 			description: 'Postgres, MySQL, Mongo, Redis',
-			accent: '#4db33d',
-			iconBg: 'rgba(77,179,61,0.12)'
+			accent: '#fd8973',
+			iconBg: 'rgba(253,137,115,0.12)'
 		},
 		{
 			type: 'docker',
 			label: 'Container',
 			description: 'Docker container workload',
-			accent: '#0db7ed',
-			iconBg: 'rgba(13,183,237,0.10)'
+			accent: '#ccd5ae',
+			iconBg: 'rgba(204,213,174,0.1)'
 		},
 		{
 			type: 'ingress',
@@ -40,8 +40,8 @@
 			type: 'volume',
 			label: 'Volume',
 			description: 'Persistent disk storage',
-			accent: '#a78bfa',
-			iconBg: 'rgba(167,139,250,0.12)'
+			accent: '#f0eeeb',
+			iconBg: 'rgba(240,238,235,0.08)'
 		}
 	];
 
@@ -197,134 +197,220 @@
 
 	<div class="palette-footer">
 		<div class="tip">Drag nodes onto the canvas</div>
+		<a href="/" class="billing-link">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="12"
+				height="12"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<rect x="3" y="3" width="7" height="7" />
+				<rect x="14" y="3" width="7" height="7" />
+				<rect x="3" y="14" width="7" height="7" />
+				<rect x="14" y="14" width="7" height="7" />
+			</svg>
+			Dashboard
+		</a>
+		<a href="/billing" class="billing-link">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="12"
+				height="12"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<line x1="12" y1="1" x2="12" y2="23" />
+				<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+			</svg>
+			Billing
+		</a>
 	</div>
 </aside>
 
 <style>
-	.palette {
-		width: 224px;
-		height: 100%;
-		background: #0f171e;
-		border-right: 1px solid #1f2c38;
-		display: flex;
-		flex-direction: column;
-		flex-shrink: 0;
-		overflow: hidden;
-	}
-	.palette-header {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 15px 14px 13px;
-		border-bottom: 1px solid #1f2c38;
-	}
-	.palette-logo {
-		width: 32px;
-		height: 32px;
-		background: rgba(255, 191, 101, 0.1);
-		border: 1px solid rgba(255, 191, 101, 0.15);
-		border-radius: 8px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-	}
-	.palette-brand {
-		font-size: 14px;
-		font-weight: 800;
-		color: #f0eeeb;
-		letter-spacing: -0.03em;
-	}
-	.palette-subtitle {
-		font-size: 10px;
-		color: #4e6272;
-		margin-top: 1px;
-		letter-spacing: 0.01em;
-	}
-	.palette-section-label {
-		font-size: 9.5px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: #3a5060;
-		padding: 14px 14px 6px;
-	}
-	.palette-list {
-		flex: 1;
-		overflow-y: auto;
-		padding: 0 8px;
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-		scrollbar-width: thin;
-		scrollbar-color: #243040 transparent;
-	}
-	.palette-item {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 8px 10px;
-		border-radius: 8px;
-		border: 1px solid transparent;
-		cursor: grab;
-		transition:
-			background 0.12s,
-			border-color 0.12s;
-		user-select: none;
-	}
-	.palette-item:hover {
-		background: rgba(255, 255, 255, 0.04);
-		border-color: rgba(255, 255, 255, 0.06);
-	}
-	.palette-item:active {
-		cursor: grabbing;
-		background: rgba(255, 255, 255, 0.06);
-	}
-	.item-icon {
-		width: 30px;
-		height: 30px;
-		border-radius: 7px;
-		background: var(--icon-bg);
-		color: var(--accent);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-	}
-	.item-text {
-		flex: 1;
-		min-width: 0;
-	}
-	.item-label {
-		font-size: 12px;
-		font-weight: 600;
-		color: #f0eeeb;
-	}
-	.item-desc {
-		font-size: 10px;
-		color: #4e6272;
-		margin-top: 1px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.drag-hint {
-		font-size: 13px;
-		color: #2a3a48;
-		line-height: 1;
-		flex-shrink: 0;
-	}
-	.palette-item:hover .drag-hint {
-		color: #4e6272;
-	}
-	.palette-footer {
-		padding: 10px 14px;
-		border-top: 1px solid #1f2c38;
-	}
-	.tip {
-		font-size: 10px;
-		color: #3a5060;
-		text-align: center;
-		letter-spacing: 0.02em;
-	}
+.palette {
+width: 220px;
+height: 100%;
+background: var(--k-blue);
+border-right: 1px solid rgba(255, 191, 101, 0.1);
+display: flex;
+flex-direction: column;
+flex-shrink: 0;
+overflow: hidden;
+}
+
+.palette-header {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 14px 14px 12px;
+border-bottom: 1px solid rgba(255, 191, 101, 0.1);
+background: rgba(0, 0, 0, 0.2);
+}
+
+.palette-logo {
+width: 30px;
+height: 30px;
+background: rgba(255, 191, 101, 0.12);
+border: 1px solid rgba(255, 191, 101, 0.22);
+border-radius: 7px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.palette-brand {
+font-size: 14px;
+font-weight: 800;
+color: var(--k-yellow);
+letter-spacing: -0.03em;
+}
+
+.palette-subtitle {
+font-size: 9.5px;
+color: var(--k-gray);
+margin-top: 1px;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+opacity: 0.7;
+}
+
+.palette-section-label {
+font-size: 9.5px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--k-gray);
+opacity: 0.5;
+padding: 14px 14px 6px;
+}
+
+.palette-list {
+flex: 1;
+overflow-y: auto;
+padding: 0 6px;
+display: flex;
+flex-direction: column;
+gap: 2px;
+scrollbar-width: thin;
+scrollbar-color: rgba(255, 191, 101, 0.15) transparent;
+}
+
+.palette-item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 8px 10px;
+border-radius: 7px;
+border: 1px solid transparent;
+cursor: grab;
+transition:
+background 0.12s,
+border-color 0.12s;
+user-select: none;
+}
+
+.palette-item:hover {
+background: rgba(255, 191, 101, 0.08);
+border-color: rgba(255, 191, 101, 0.15);
+}
+
+.palette-item:active {
+cursor: grabbing;
+background: rgba(255, 191, 101, 0.12);
+}
+
+.item-icon {
+width: 30px;
+height: 30px;
+border-radius: 7px;
+background: var(--icon-bg);
+color: var(--accent);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.item-text {
+flex: 1;
+min-width: 0;
+}
+
+.item-label {
+font-size: 12px;
+font-weight: 700;
+color: var(--k-white);
+}
+
+.item-desc {
+font-size: 10px;
+color: var(--k-gray);
+margin-top: 1px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+opacity: 0.65;
+}
+
+.drag-hint {
+font-size: 13px;
+color: var(--k-gray);
+opacity: 0.2;
+line-height: 1;
+flex-shrink: 0;
+}
+
+.palette-item:hover .drag-hint {
+opacity: 0.5;
+}
+
+.palette-footer {
+padding: 10px 10px;
+border-top: 1px solid rgba(255, 191, 101, 0.1);
+background: rgba(0, 0, 0, 0.15);
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.tip {
+font-size: 9.5px;
+color: var(--k-gray);
+text-align: center;
+letter-spacing: 0.04em;
+opacity: 0.4;
+padding: 2px 0;
+}
+
+.billing-link {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+padding: 6px 10px;
+border-radius: 6px;
+font-size: 11.5px;
+font-weight: 600;
+color: var(--k-gray);
+text-decoration: none;
+border: 1px solid rgba(255, 191, 101, 0.12);
+transition: all 0.15s;
+}
+
+.billing-link:hover {
+color: var(--k-yellow);
+border-color: rgba(255, 191, 101, 0.3);
+background: rgba(255, 191, 101, 0.07);
+}
 </style>

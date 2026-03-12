@@ -217,12 +217,12 @@
 				nodeColor={(n) => {
 					const colors: Record<string, string> = {
 						vm: '#ffbf65',
-						database: '#4db33d',
-						docker: '#0db7ed',
+						database: '#fd8973',
+						docker: '#ccd5ae',
 						ingress: '#fd8973',
-						volume: '#a78bfa'
+						volume: '#f0eeeb'
 					};
-					return colors[n.type ?? ''] ?? '#2a3540';
+					return colors[n.type ?? ''] ?? 'rgba(0,58,108,0.6)';
 				}}
 			/>
 		</SvelteFlow>
@@ -236,95 +236,95 @@
 </div>
 
 <style>
-	.editor-root {
-		display: flex;
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-		background: #13181b;
-	}
+.editor-root {
+display: flex;
+width: 100vw;
+height: 100vh;
+overflow: hidden;
+background: var(--k-black);
+}
 
-	.canvas-wrap {
-		flex: 1;
-		min-width: 0;
-		height: 100%;
-		position: relative;
-	}
+.canvas-wrap {
+flex: 1;
+min-width: 0;
+height: 100%;
+position: relative;
+}
 
-	.panel-overlay {
-		position: absolute;
-		top: 12px;
-		right: 12px;
-		bottom: 12px;
-		z-index: 10;
-		pointer-events: auto;
-	}
+.panel-overlay {
+position: absolute;
+top: 12px;
+right: 12px;
+bottom: 12px;
+z-index: 10;
+pointer-events: auto;
+}
 
-	/* Edge paths */
-	:global(.svelte-flow__edge-path) {
-		stroke: #2a3e52;
-		stroke-width: 1.5;
-	}
-	:global(.svelte-flow__edge.selected .svelte-flow__edge-path),
-	:global(.svelte-flow__edge:hover .svelte-flow__edge-path) {
-		stroke: #ffbf65;
-		stroke-width: 2;
-	}
+/* ── Edge paths ──────────────────────────────────────────────────────────── */
+:global(.svelte-flow__edge-path) {
+stroke: rgba(0, 58, 108, 0.7);
+stroke-width: 2;
+}
+:global(.svelte-flow__edge.selected .svelte-flow__edge-path),
+:global(.svelte-flow__edge:hover .svelte-flow__edge-path) {
+stroke: #ffbf65;
+stroke-width: 2;
+}
 
-	/* Connection line while dragging */
-	:global(.svelte-flow__connection-path) {
-		stroke: #ffbf65;
-		stroke-width: 2;
-		stroke-dasharray: 6 4;
-	}
+/* ── Connection line while dragging ─────────────────────────────────────── */
+:global(.svelte-flow__connection-path) {
+stroke: #ffbf65;
+stroke-width: 2;
+stroke-dasharray: 6 4;
+}
 
-	/* Handles */
-	:global(.svelte-flow__handle) {
-		width: 9px;
-		height: 9px;
-		border-radius: 50%;
-		background: #003a6c;
-		border: 2px solid #ffbf65;
-		transition:
-			transform 0.15s,
-			background 0.15s;
-	}
-	:global(.svelte-flow__handle:hover) {
-		background: #ffbf65;
-		transform: scale(1.35);
-	}
+/* ── Handles ─────────────────────────────────────────────────────────────── */
+:global(.svelte-flow__handle) {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: var(--k-black);
+border: 2px solid var(--k-yellow);
+transition:
+transform 0.15s,
+background 0.15s;
+}
+:global(.svelte-flow__handle:hover) {
+background: var(--k-yellow);
+transform: scale(1.3);
+}
 
-	/* Controls panel */
-	:global(.svelte-flow__controls) {
-		background: #18232c;
-		border: 1px solid #243040;
-		border-radius: 10px;
-		overflow: hidden;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-	}
-	:global(.svelte-flow__controls-button) {
-		background: #18232c !important;
-		border-bottom: 1px solid #243040 !important;
-		color: #4e6272 !important;
-		fill: #4e6272 !important;
-		transition:
-			background 0.15s,
-			color 0.15s !important;
-	}
-	:global(.svelte-flow__controls-button:hover) {
-		background: #1f2e3a !important;
-		color: #f0eeeb !important;
-		fill: #f0eeeb !important;
-	}
-	:global(.svelte-flow__controls-button:last-child) {
-		border-bottom: none !important;
-	}
+/* ── Controls panel ──────────────────────────────────────────────────────── */
+:global(.svelte-flow__controls) {
+background: var(--k-blue) !important;
+border: 1px solid rgba(255, 191, 101, 0.2);
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+:global(.svelte-flow__controls-button) {
+background: transparent !important;
+border-bottom: 1px solid rgba(255, 191, 101, 0.1) !important;
+color: var(--k-gray) !important;
+fill: var(--k-gray) !important;
+transition:
+background 0.15s,
+color 0.15s !important;
+}
+:global(.svelte-flow__controls-button:hover) {
+background: rgba(255, 191, 101, 0.1) !important;
+color: var(--k-yellow) !important;
+fill: var(--k-yellow) !important;
+}
+:global(.svelte-flow__controls-button:last-child) {
+border-bottom: none !important;
+}
 
-	/* Minimap */
-	:global(.svelte-flow__minimap) {
-		background: #18232c !important;
-		border: 1px solid #243040;
-		border-radius: 10px;
-		overflow: hidden;
-	}
+/* ── Minimap ─────────────────────────────────────────────────────────────── */
+:global(.svelte-flow__minimap) {
+background: var(--k-blue) !important;
+border: 1px solid rgba(255, 191, 101, 0.15);
+border-radius: 8px;
+overflow: hidden;
+}
 </style>

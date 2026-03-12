@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import '@xyflow/svelte/dist/style.css';
 
+/* ── Brand design tokens ──────────────────────────────────────────────────── */
 @theme {
 	--color-kodai-white: #f0eeeb;
 	--color-kodai-gray: #ccd5ae;
@@ -11,24 +12,163 @@
 }
 
 :root {
+	/* Brand palette */
+	--k-black: #13181b;
+	--k-blue: #003a6c;
+	--k-yellow: #ffbf65;
+	--k-orange: #fd8973;
+	--k-white: #f0eeeb;
+	--k-gray: #ccd5ae;
+
+	/* Blue-tinted surfaces (brand blue at opacity over black) */
+	--k-surface: rgba(0, 58, 108, 0.18);
+	--k-surface-raised: rgba(0, 58, 108, 0.32);
+	--k-border: rgba(0, 58, 108, 0.5);
+	--k-border-subtle: rgba(0, 58, 108, 0.3);
+
+	/* Yellow/orange tints */
+	--k-yellow-tint: rgba(255, 191, 101, 0.1);
+	--k-yellow-tint-hover: rgba(255, 191, 101, 0.18);
+	--k-orange-tint: rgba(253, 137, 115, 0.1);
+
+	/* ── XyFlow canvas theming ──────────────────────────────────── */
 	--xy-background-color-default: #13181b;
-	--xy-background-pattern-dot-color-default: #2a3540;
-	--xy-node-background-color-default: #1e2a32;
-	--xy-node-border-default: 1px solid #2a3540;
+	--xy-background-pattern-dot-color-default: rgba(0, 58, 108, 0.55);
+	--xy-node-background-color-default: rgba(0, 58, 108, 0.55);
+	--xy-node-border-default: 1px solid rgba(0, 58, 108, 0.7);
 	--xy-node-color-default: #f0eeeb;
 	--xy-node-boxshadow-hover-default: 0 0 0 1px #ffbf65;
 	--xy-node-boxshadow-selected-default: 0 0 0 2px #ffbf65;
-	--xy-edge-stroke-default: #ccd5ae;
-	--xy-edge-stroke-width-default: 2;
+	--xy-edge-stroke-default: rgba(204, 213, 174, 0.45);
+	--xy-edge-stroke-width-default: 1.5;
 	--xy-edge-stroke-selected-default: #ffbf65;
-	--xy-handle-background-color-default: #003a6c;
+	--xy-handle-background-color-default: #13181b;
 	--xy-handle-border-color-default: #ffbf65;
 	--xy-minimap-background-color-default: #13181b;
-	--xy-minimap-node-background-color-default: #1e2a32;
-	--xy-controls-button-background-color-default: #1e2a32;
+	--xy-minimap-node-background-color-default: rgba(0, 58, 108, 0.6);
+	--xy-controls-button-background-color-default: rgba(0, 58, 108, 0.6);
 	--xy-controls-button-color-default: #f0eeeb;
-	--xy-controls-button-border-color-default: #2a3540;
-	--xy-controls-button-background-color-hover-default: #2a3540;
-	--xy-attribution-background-color-default: rgba(19, 24, 27, 0.7);
+	--xy-controls-button-border-color-default: rgba(255, 191, 101, 0.2);
+	--xy-controls-button-background-color-hover-default: rgba(255, 191, 101, 0.15);
+	--xy-attribution-background-color-default: rgba(0, 0, 0, 0.65);
 	color-scheme: dark;
+}
+
+/* ── Global reset ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* ── Shared app shell ─────────────────────────────────────────────────────── */
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--k-black);
+	color: var(--k-white);
+	font-family:
+		'Inter',
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		system-ui,
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Shared nav component ─────────────────────────────────────────────────── */
+.k-nav {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	background: var(--k-blue);
+	border-radius: 8px;
+	padding: 4px;
+}
+
+.k-nav-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	border-radius: 5px;
+	font-size: 12.5px;
+	font-weight: 500;
+	color: var(--k-gray);
+	text-decoration: none;
+	transition:
+		color 0.15s,
+		background 0.15s;
+}
+
+.k-nav-item svg {
+	width: 13px;
+	height: 13px;
+	flex-shrink: 0;
+}
+
+.k-nav-item:hover {
+	color: var(--k-white);
+	background: var(--k-yellow-tint);
+}
+
+.k-nav-item.active {
+	background: var(--k-yellow);
+	color: var(--k-black);
+	font-weight: 700;
+}
+
+/* ── Shared page header ───────────────────────────────────────────────────── */
+.k-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 28px;
+	height: 52px;
+	background: var(--k-black);
+	border-bottom: 1px solid var(--k-border-subtle);
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	gap: 16px;
+}
+
+.k-logo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.k-logo-box {
+	width: 30px;
+	height: 30px;
+	border-radius: 7px;
+	background: var(--k-yellow-tint);
+	border: 1px solid rgba(255, 191, 101, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.k-logo-box svg {
+	width: 15px;
+	height: 15px;
+}
+
+.k-brand {
+	font-size: 15px;
+	font-weight: 800;
+	color: var(--k-yellow);
+	letter-spacing: -0.03em;
+}
+
+.k-brand-sub {
+	font-size: 9.5px;
+	color: var(--k-gray);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin-top: 1px;
 }

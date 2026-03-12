@@ -4,11 +4,12 @@
 
 	let { data, selected }: NodeProps<DatabaseNode> = $props();
 
+	// All databases use the brand orange accent
 	const engineColors: Record<string, string> = {
-		postgres: '#336791',
-		mysql: '#00758f',
-		mongodb: '#4db33d',
-		redis: '#d82c20'
+		postgres: '#fd8973',
+		mysql: '#fd8973',
+		mongodb: '#fd8973',
+		redis: '#fd8973'
 	};
 
 	const engineLabels: Record<string, string> = {
@@ -21,7 +22,7 @@
 	let accentColor = $derived(engineColors[data.engine] ?? '#fd8973');
 </script>
 
-<div class="node-card" class:selected style="--accent: {accentColor}; --icon-bg: {accentColor}1e;">
+<div class="node-card" class:selected style="--accent: {accentColor}; --icon-bg: rgba(253,137,115,0.12);">
 	<Handle type="target" position={Position.Top} />
 
 	<div class="node-header">
@@ -71,81 +72,88 @@
 </div>
 
 <style>
-	.node-card {
-		min-width: 220px;
-		background: #18232c;
-		border: 1px solid #243040;
-		border-radius: 12px;
-		overflow: hidden;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-		transition:
-			box-shadow 0.2s,
-			border-color 0.2s;
-	}
-	.node-card.selected {
-		border-color: var(--accent);
-		box-shadow:
-			0 0 0 1px var(--accent),
-			0 6px 20px rgba(0, 0, 0, 0.4);
-	}
-	.node-header {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 11px 13px 9px;
-		border-bottom: 1px solid #1f2c38;
-		position: relative;
-	}
-	.node-header::before {
-		content: '';
-		position: absolute;
-		inset: 0 0 auto 0;
-		height: 2px;
-		background: var(--accent);
-		opacity: 0.7;
-	}
-	.node-icon {
-		width: 32px;
-		height: 32px;
-		border-radius: 7px;
-		background: var(--icon-bg);
-		color: var(--accent);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-	}
-	.node-type {
-		font-size: 9.5px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.09em;
-		color: var(--accent);
-	}
-	.node-label {
-		font-size: 13px;
-		font-weight: 600;
-		color: #f0eeeb;
-		margin-top: 2px;
-	}
-	.node-body {
-		padding: 10px 13px 12px;
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-	}
-	.node-stat {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 11.5px;
-	}
-	.stat-key {
-		color: #4e6272;
-		font-weight: 500;
-	}
-	.stat-val {
-		color: #ccd5ae;
-		font-weight: 500;
-	}
+.node-card {
+min-width: 210px;
+background: var(--k-blue);
+border: 1px solid rgba(0, 58, 108, 0.8);
+border-top: 3px solid var(--accent);
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+transition:
+box-shadow 0.2s,
+border-color 0.2s;
+}
+.node-card.selected {
+border-color: var(--accent);
+box-shadow:
+0 0 0 1px var(--accent),
+0 6px 24px rgba(0, 0, 0, 0.5);
+}
+.node-header {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 10px 12px 9px;
+border-bottom: 1px solid rgba(255, 191, 101, 0.07);
+background: rgba(0, 0, 0, 0.15);
+}
+.node-icon {
+width: 30px;
+height: 30px;
+border-radius: 6px;
+background: var(--icon-bg);
+color: var(--accent);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+.node-type {
+font-size: 9px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--accent);
+opacity: 0.85;
+}
+.node-label {
+font-size: 13px;
+font-weight: 700;
+color: #f0eeeb;
+margin-top: 2px;
+}
+.node-body {
+padding: 9px 12px 11px;
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+.node-stat {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 11.5px;
+}
+.stat-key {
+color: #ccd5ae;
+opacity: 0.6;
+font-weight: 500;
+}
+.stat-val {
+color: #f0eeeb;
+font-weight: 600;
+}
+.node-badge {
+margin: 0 12px 10px;
+display: inline-block;
+font-size: 10px;
+font-weight: 700;
+padding: 2px 8px;
+border-radius: 20px;
+background: rgba(255, 191, 101, 0.1);
+color: #ffbf65;
+border: 1px solid rgba(255, 191, 101, 0.22);
+letter-spacing: 0.04em;
+}
 </style>
